@@ -1,0 +1,44 @@
+package gameProto;
+syntax = "proto3";
+option java_package = "com.game.proto.protobuf";
+option java_outer_classname = "WorkProto";
+
+
+
+// 登陆请求	proto: 0x0401			action: userAction
+message Req_Login {
+	string account							= 1;				//账号
+	int32 loginType							= 2;				//登陆类型 99测试
+
+}
+
+// 登陆返回	proto: -0x0401			action: -1
+message Resp_Login {
+     int32 state							= 1;				//状态码 0成功 其他失败
+     string uid								= 2;				//用户id
+     string desc							= 4;				//描述信息
+     string account							= 5;				//账号
+}
+
+// 用户退出请求	proto: 0x0402		action: -1
+message Req_UserExit {
+	string uid								= 1;				//用户id
+}
+
+// 用户退出返回	proto: -0x0402		action: -1
+message Resp_UserExit {
+	string uid								= 1;				//用户id
+	int32 state								= 2;				//状态码 0成功
+}
+
+// 用户信息请求	proto: 0x0403		action: userAction
+message Req_UserInfo{
+}
+// 用户信息返回	proto: -0x0403		action: -1
+message Resp_UserInfo{
+	string uid								= 1; 				//用户id
+	string nickName							= 2;				//用户昵称
+	int64 coin								= 3; 				//用户金币
+	int64 diamond							= 4;				//用户钻石
+}
+

@@ -1,0 +1,9 @@
+release/
+/.rpt2_cache/
+/src/GameConfig.ts
+/bin/*
+!/bin/libs
+!/bin/index.html
+!/bin/index.js
+/node_modules
+.DS_Store
