@@ -156,6 +156,10 @@ onMessageCallbck:(message)=>{
     if(GameConstant.PROTOBUFMESSAGEIDLIST[`ID_${message.id}`] != undefined){
         const key = fishingProto[GameConstant.PROTOBUFMESSAGEIDLIST[`ID_${message.id}`]]
         message.obj = key.decode(message.data)
+        message.obj = {
+                ...key.prototype,
+                ...message.obj
+            }
     }else{
         console.log(`Unknow Proto Message ID : ${message.id}`)
     }
@@ -167,7 +171,7 @@ onMessageCallbck:(message)=>{
     }
 }
 ```
-```message```为```Postoffice```按配置处理后的消息体，protobuf对应的内容在```data```字段，按```id```字段找到protobuf对象，处理后的对象为```message.obj```
+```message```为```Postoffice```按配置处理后的消息体，protobuf对应的内容在```data```字段，按```id```字段找到protobuf对象，处理后的对象为```message.obj```，使用```key.prototype```填入默认对象值，防止比如为0的默认值不存在。二级对象的默认值要用包内的指定对象类型的prototype填入。
 
 ## 心跳设置
 初始化Postoffice的时候可以设置是否使用心跳
